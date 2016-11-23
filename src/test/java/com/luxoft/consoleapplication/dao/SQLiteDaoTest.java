@@ -1,7 +1,6 @@
 package com.luxoft.consoleapplication.dao;
 
 import com.luxoft.consoleapplication.model.LineReport;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -48,7 +47,8 @@ public class SQLiteDaoTest {
 
         List<LineReport> reports = dao.getAllReports();
 
-        if(reports.contains(expectedReport))
+        if(reports.contains(expectedReport)){
             fail();
+        }
     }
 }

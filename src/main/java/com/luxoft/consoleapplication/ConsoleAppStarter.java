@@ -17,6 +17,8 @@ import java.util.List;
  *    shortest word, line length, average word length. Unit test are mandatory
  * -  Aggregate these values for all lines from file(unit test)
  * -  Store line and file statistic into DB(with JDBC).
+ *
+ *    Using SQLite db for more simplicity
  */
 public class ConsoleAppStarter {
 
@@ -27,6 +29,9 @@ public class ConsoleAppStarter {
         appStarter.run();
     }
 
+    /**
+     * Put your path to test file into String path.
+     */
     private void run() {
         String path = "D:\\Text.txt";
         Path pathToFile = Paths.get(path);
