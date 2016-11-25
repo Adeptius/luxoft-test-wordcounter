@@ -11,21 +11,31 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        table{
+            width: 80%;
+            background-color: aliceblue;
+            margin-left: 10%;
+            margin-top: 5%;
+            border-radius: 10px;
+            border: 5px solid green;
+        }
+
+        th{
+            background-color: aqua;
+        }
+        tr{
+            border-bottom: solid;
+            border-color: brown;
+        }
+    </style>
+
 </head>
 <body>
 
-<form method="POST" action="/scan-file">
-    Path file to scan and add to DB: <input type="text" name="path">
-    <input type="submit" name="okbutton" value="OK" />
-</form>
-<form method="POST" action="/delete-all">
-    <input type="submit" name="okbutton" value="Delete all" />
-</form>
+
 
 <table>
-    <!--tr - строка-->
-    <!--td - столбец-->
-    <!--th - заголовок столбца-->
     <tr>
         <th>String</th>
         <th>length</th>
@@ -45,12 +55,5 @@
     </tr>
     </c:forEach>
 </table>
-
-
-
-
-
-
-
 </body>
 </html>

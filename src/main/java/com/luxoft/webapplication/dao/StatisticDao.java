@@ -1,7 +1,5 @@
 package com.luxoft.webapplication.dao;
 
-
-import com.luxoft.consoleapplication.model.LineReport;
 import com.luxoft.webapplication.model.LineStatistic;
 
 import java.util.List;

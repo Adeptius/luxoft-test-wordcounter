@@ -24,6 +24,8 @@
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory"/>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
     <!--Добавляю поддержку аннотаций в транзакциях-->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 
