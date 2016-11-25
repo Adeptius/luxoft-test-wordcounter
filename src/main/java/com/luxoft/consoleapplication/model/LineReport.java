@@ -3,11 +3,12 @@ package com.luxoft.consoleapplication.model;
 
 public class LineReport {
 
-    String line;
-    String shortest;
-    String longest;
-    int average;
-    int lineLength;
+
+    private String line;
+    private String shortest;
+    private String longest;
+    private int average;
+    private int lineLength;
 
     @Override
     public boolean equals(Object o) {

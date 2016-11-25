@@ -20,6 +20,7 @@ import java.util.List;
  *
  *    Using SQLite db for more simplicity
  */
+@SuppressWarnings("Duplicates")
 public class ConsoleAppStarter {
 
     private StringsDao dao = new SQLiteDao();
