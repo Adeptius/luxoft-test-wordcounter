@@ -11,7 +11,7 @@
     <!--Connection-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="org.sqlite.JDBC"
-          p:url="jdbc:sqlite:d:/StringsDB.db"/>
+          p:url="jdbc:sqlite:d:\StringsDB.db"/>
 
     <!--Фабрика сессий. Предоставляет доступ к гибернейту-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
