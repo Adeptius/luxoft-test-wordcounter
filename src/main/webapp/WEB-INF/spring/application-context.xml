@@ -20,6 +20,7 @@
           p:hibernateProperties="hibernate.dialect=com.enigmabridge.hibernate.dialect.SQLiteDialect">
     </bean>
 
+
     <!--Добавляю гибернейтовский менеджер транзакций-->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory"/>

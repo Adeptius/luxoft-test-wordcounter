@@ -1,14 +1,13 @@
-package com.luxoft.consoleapplication;
+package com.luxoft.webapplication.dao;
 
 
-import com.luxoft.consoleapplication.dao.SQLiteDaoTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         SQLiteDaoTest.class,
-        ConsoleAppTest.class
+        StringUtilsTest.class
 })
 public class TestAllSuite {
 }

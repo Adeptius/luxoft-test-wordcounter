@@ -1,40 +1,39 @@
-package com.luxoft.consoleapplication;
+package com.luxoft.webapplication.dao;
 
 
+import com.luxoft.webapplication.utils.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ConsoleAppTest {
+public class StringUtilsTest {
 
-    private static ConsoleAppStarter appStarter;
     private static String testString = "Сьешь еще этих мягких французких булок";
     private static String[] testArray;
 
     @BeforeClass
-    public static void init(){
-        appStarter = new ConsoleAppStarter();
+    public static void init() {
         testArray = testString.split(" ");
     }
 
     @Test
-    public void getShortestWord(){
-        String result = appStarter.getShortestWord(testArray);
+    public void getShortestWord() {
+        String result = StringUtils.getShortestWord(testArray);
         assertEquals("еще", result);
 
     }
 
     @Test
-    public void getLongestWord(){
-        String result = appStarter.getLongestWord(testArray);
+    public void getLongestWord() {
+        String result = StringUtils.getLongestWord(testArray);
         assertEquals("французких", result);
 
     }
 
     @Test
-    public  void getAverageWordLength(){
-        int result = appStarter.getAverageWordLength(testArray);
+    public void getAverageWordLength() {
+        int result = StringUtils.getAverageWordLength(testArray);
         assertEquals(4, result);
 
     }
