@@ -6,6 +6,7 @@ import com.luxoft.webapplication.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +41,7 @@ public class MainController {
 
     @RequestMapping(value = "/load-file", method = RequestMethod.POST)
     public String fileUploaded(File file) {
-        try{
+        try {
             MultipartFile multipartFile = file.getFile();
             BufferedReader reader = new BufferedReader(new InputStreamReader(multipartFile.getInputStream()));
             List<String> strings = new ArrayList<>();
@@ -49,9 +50,38 @@ public class MainController {
                 strings.add(new String(buff, "UTF-8"));
             }
             Main.saveStatistic(StringUtils.createList(multipartFile.getOriginalFilename(), strings));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "options";
+    }
+
+    @RequestMapping(value = "/load-table", method = RequestMethod.GET, produces = {"text/html; charset=UTF-8"})
+    public
+    @ResponseBody
+    String loadTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(
+                "    <tr>\n" +
+                "        <th>String</th>\n" +
+                "        <th>length</th>\n" +
+                "        <th>Shortest</th>\n" +
+                "        <th>Longest</th>\n" +
+                "        <th>Word avg length</th>\n" +
+                "        <th>File name</th>\n" +
+                "    </tr>\n" +
+                "    \n");
+        List<LineStatistic> list = Main.getAllFromBase();
+        for (LineStatistic statistic : list) {
+            builder.append("<tr>\n            ");
+            builder.append("<td>" + statistic.getLine() + "</td>");
+            builder.append("<td>" + statistic.getLineLength() + "</td>");
+            builder.append("<td>" + statistic.getShortest() + "</td>");
+            builder.append("<td>" + statistic.getLongest() + "</td>");
+            builder.append("<td>" + statistic.getAverage() + "</td>");
+            builder.append("<td>" + statistic.getFilename() + "</td>");
+            builder.append("    </tr>\n");
+        }
+        return builder.toString();
     }
 }
