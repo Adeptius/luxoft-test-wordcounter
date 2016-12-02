@@ -9,6 +9,41 @@ import java.util.List;
 @SuppressWarnings("Duplicates")
 public class StringUtils {
 
+    public static String generateHtmlTable(List<LineStatistic> list){
+        StringBuilder builder = new StringBuilder();
+        builder.append(
+                "    <tr>\n" +
+                        "        <th>String</th>\n" +
+                        "        <th>length</th>\n" +
+                        "        <th>Shortest</th>\n" +
+                        "        <th>Longest</th>\n" +
+                        "        <th>Word avg length</th>\n" +
+                        "        <th>File name</th>\n" +
+                        "    </tr>\n" +
+                        "    \n");
+
+        for (LineStatistic statistic : list) {
+            builder.append("<tr>\n            ");
+            builder.append("<td>" + statistic.getLine() + "</td>");
+            builder.append("<td>" + statistic.getLineLength() + "</td>");
+            builder.append("<td>" + statistic.getShortest() + "</td>");
+            builder.append("<td>" + statistic.getLongest() + "</td>");
+            builder.append("<td>" + statistic.getAverage() + "</td>");
+            builder.append("<td>" + statistic.getFilename() + "</td>");
+            builder.append("    </tr>\n");
+        }
+        return builder.toString();
+    }
+
+    public static List<LineStatistic> createList(String filename, String fileContent){
+        String[] arr = fileContent.split("\n");
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(arr[i]);
+        }
+        return createList(filename, list);
+    }
+
     public static List<LineStatistic> createList(String filename, List<String> list) {
         List<LineStatistic> statisticList = new ArrayList<>();
         for (String line : list) {

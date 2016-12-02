@@ -9,7 +9,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('.showWithAjax').on('click', function doAjax() {
+            function showTable() {
                 $.ajax('/load-table', {
                     success: function (data) {
                         var table = $('.resultTable');
@@ -19,20 +19,56 @@
                         table.slideDown();
                     }
                 });
-            })
+            }
 
-            $('.sendFileToDBWithAjax').on('click', function () {
-                $.ajax({
-                    url: '/load-file', data: (  {file: $('.file')}  ), success: function (data) {
-                        alert('updated');
+//            Show DB as table
+            $('.showWithAjax').on('click', function () {
+                showTable();
+            } );
+
+            //            Delete from db
+            $('.deleteAllAjax').on('click', function() {
+                $.ajax('/delete-all', {
+                    success: function (data) {
+                        $('.resultTable').hide();
+
                     }
-                })
-            })
+                });
+            });
 
+//            Uploading file to DB
+            $('.sendFileToDBWithAjax').on('click', function () {
+                var data = new FormData();
+                jQuery.each(jQuery('.file')[0].files, function (i, file) {
+                    data.append('file-' + i, file);
+                });
+
+                jQuery.ajax({
+                    url: '/upload',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function (data) {
+                        //alert(data);
+                    },
+                    error: function() {
+                        $('#uploadResult').text('Error...');;
+                    },
+                    timeout: 5000,
+                    beforeSend: function() {
+                        $('#uploadResult').text('Loading...');
+                    },
+                    complete: function() {
+                        $('#uploadResult').text('Loading complete!');
+                        showTable();
+                    }
+                });
+            })
 
         });
     </script>
-
     <style>
         table {
             width: 80%;
@@ -53,25 +89,19 @@
             border-color: brown;
         }
     </style>
-
 </head>
 <body>
 
-<form enctype="multipart/form-data" method="POST">
-    <p>Загрузить файл на сервер</p>
+<div>
     <input class="file" type="file" name="file">
-</form>
-<button class="sendFileToDBWithAjax">Отправить</button>
+    <button class="sendFileToDBWithAjax">Отправить</button>
+    <div id="uploadResult">  </div>
+</div>
 
-<form method="POST" action="/delete-all">
-    <input type="submit" name="delallbtn" value="Delete all"/>
-</form>
-<button class="showWithAjax">Show all with ajax</button>
+<button class="deleteAllAjax">Delete all</button>
+<button class="showWithAjax">Show all</button>
 
 <table class="resultTable"></table>
 
 </body>
 </html>
-<%--<form method="POST" action="/look-all">--%>
-<%--<input type="submit" name="showallbtn" value="Show all"/>--%>
-<%--</form>--%>
