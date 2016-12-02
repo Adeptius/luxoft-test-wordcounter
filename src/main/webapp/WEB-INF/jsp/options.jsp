@@ -8,6 +8,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
             $('.showWithAjax').on('click', function doAjax() {
                 $.ajax('/load-table', {
                     success: function (data) {
@@ -19,6 +20,16 @@
                     }
                 });
             })
+
+            $('.sendFileToDBWithAjax').on('click', function () {
+                $.ajax({
+                    url: '/load-file', data: (  {file: $('.file')}  ), success: function (data) {
+                        alert('updated');
+                    }
+                })
+            })
+
+
         });
     </script>
 
@@ -45,27 +56,22 @@
 
 </head>
 <body>
-<form enctype="multipart/form-data" method="POST" action="/load-file">
-    <p>Загрузите файл на сервер</p>
-    <p><input type="file" name="file">
-        <input type="submit" value="Отправить"></p>
+
+<form enctype="multipart/form-data" method="POST">
+    <p>Загрузить файл на сервер</p>
+    <input class="file" type="file" name="file">
 </form>
+<button class="sendFileToDBWithAjax">Отправить</button>
 
 <form method="POST" action="/delete-all">
     <input type="submit" name="delallbtn" value="Delete all"/>
 </form>
-
-<form method="POST" action="/look-all">
-    <input type="submit" name="showallbtn" value="Show all"/>
-</form>
-
 <button class="showWithAjax">Show all with ajax</button>
 
-
-<table class="resultTable">
-
-</table>
-
+<table class="resultTable"></table>
 
 </body>
 </html>
+<%--<form method="POST" action="/look-all">--%>
+<%--<input type="submit" name="showallbtn" value="Show all"/>--%>
+<%--</form>--%>

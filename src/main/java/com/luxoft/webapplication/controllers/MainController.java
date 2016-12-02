@@ -39,10 +39,15 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/load-file", method = RequestMethod.POST)
-    public String fileUploaded(File file) {
+    @RequestMapping(value = "/load-file", method = RequestMethod.GET, produces = {"text/html; charset=UTF-8"})
+    public
+    @ResponseBody
+    String fileUploaded(Object file) {
+        System.out.println(file);
+
+        File file1 = (File) file;
         try {
-            MultipartFile multipartFile = file.getFile();
+            MultipartFile multipartFile = file1.getFile();
             BufferedReader reader = new BufferedReader(new InputStreamReader(multipartFile.getInputStream()));
             List<String> strings = new ArrayList<>();
             while (reader.ready()) {
@@ -53,7 +58,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "options";
+        return "";
     }
 
     @RequestMapping(value = "/load-table", method = RequestMethod.GET, produces = {"text/html; charset=UTF-8"})
