@@ -27,7 +27,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <targetPath>/resources</targetPath>
             </resource>
         </resources>
     </build>
@@ -123,6 +122,12 @@
             <groupId>com.enigmabridge</groupId>
             <artifactId>hibernate4-sqlite-dialect</artifactId>
             <version>0.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.3.RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

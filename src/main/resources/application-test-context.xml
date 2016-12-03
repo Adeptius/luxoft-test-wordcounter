@@ -8,22 +8,26 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!--Connection-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="org.sqlite.JDBC"
           p:url="jdbc:sqlite:D:\YandexDisk\Java\Projects\luxoft-test\db\StringsDB.db"/>
     <!--ЗДЕСЬ УКАЗАТЬ АБСОЛЮТНЫЙ ПУТЬ К ФАЙЛУ DB-->
 
+    <!--Фабрика сессий. Предоставляет доступ к гибернейту-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:packagesToScan="com.luxoft.webapplication"
           p:hibernateProperties="hibernate.dialect=com.enigmabridge.hibernate.dialect.SQLiteDialect">
     </bean>
 
+    <!--Добавляю гибернейтовский менеджер транзакций-->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory"/>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
+    <!--Добавляю поддержку аннотаций в транзакциях-->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 
     <bean id="main" class="com.luxoft.webapplication.dao.DbController"
@@ -31,5 +35,7 @@
 
     <bean id="dao" class="com.luxoft.webapplication.dao.SQLiteHibernateDao"
           p:sessionFactory-ref="sessionFactory"/>
+
+
 
 </beans>

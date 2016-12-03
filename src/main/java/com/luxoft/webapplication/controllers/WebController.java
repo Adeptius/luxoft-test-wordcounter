@@ -1,6 +1,6 @@
 package com.luxoft.webapplication.controllers;
 
-import com.luxoft.webapplication.Main;
+import com.luxoft.webapplication.dao.DbController;
 import com.luxoft.webapplication.model.LineStatistic;
 import com.luxoft.webapplication.utils.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class MainController {
+public class WebController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
@@ -26,7 +26,7 @@ public class MainController {
 
     @RequestMapping(value = "/delete-all", method = RequestMethod.GET)
     public String scan() {
-        Main.deleteAll();
+        DbController.deleteAll();
         return "options";
     }
 
@@ -34,7 +34,7 @@ public class MainController {
     public
     @ResponseBody
     String loadTable() {
-        List<LineStatistic> list = Main.getAllFromBase();
+        List<LineStatistic> list = DbController.getAllFromBase();
         return StringUtils.generateHtmlTable(list);
     }
 
@@ -44,17 +44,12 @@ public class MainController {
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf = request.getFile(itr.next());
         try {
-            int length = mpf.getBytes().length;
             byte[] bytes = mpf.getBytes();
-            String type = mpf.getContentType();
             String filename = mpf.getOriginalFilename();
-
             String result = new String(bytes, "UTF-8");
             List<LineStatistic> stat = StringUtils.createList(filename, result);
-            Main.saveStatistic(stat);
-
+            DbController.saveStatistic(stat);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return "fail";
         }
