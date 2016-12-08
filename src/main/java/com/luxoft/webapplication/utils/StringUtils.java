@@ -21,7 +21,6 @@ public class StringUtils {
                         "        <th>File name</th>\n" +
                         "    </tr>\n" +
                         "    \n");
-
         for (LineStatistic statistic : list) {
             builder.append("<tr>\n            ");
             builder.append("<td>" + statistic.getLine() + "</td>");

@@ -21,11 +21,13 @@ public class WebController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
+        System.out.println("options");
         return "options";
     }
 
     @RequestMapping(value = "/delete-all", method = RequestMethod.GET)
     public String scan() {
+        System.out.println("delete-all");
         DbController.deleteAll();
         return "options";
     }
@@ -34,6 +36,7 @@ public class WebController {
     public
     @ResponseBody
     String loadTable() {
+        System.out.println("load-table");
         List<LineStatistic> list = DbController.getAllFromBase();
         return StringUtils.generateHtmlTable(list);
     }
@@ -41,6 +44,7 @@ public class WebController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+        System.out.println("upload");
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf = request.getFile(itr.next());
         try {
